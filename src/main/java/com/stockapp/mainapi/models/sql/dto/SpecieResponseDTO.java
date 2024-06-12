@@ -12,11 +12,16 @@ public class SpecieResponseDTO {
 
     public SpecieResponseDTO(SpeciesModel specie) {
         this.id = specie.getId();
-        this.image = specie.getImage();
+        this.registered_by = new SpecieRegisteredByUserDTO(specie.getRegisteredBy().getId(), specie.getRegisteredBy().getUsername());
+        this.image = getImagePath(specie.getImage());
         this.name = specie.getName();
         this.specie = specie.getSpecie();
         this.description = specie.getDescription();
-        this.registered_by = new SpecieRegisteredByUserDTO(specie.getRegisteredBy().getId(), specie.getRegisteredBy().getUsername());
+    }
+
+    public String getImagePath(String image) {
+        if(image == null || id == 0) return null;
+        return "http://192.168.31.31:8080/uploads/" + registered_by.id() + "/" + image;
     }
 
     public int getId() {

@@ -1,5 +1,5 @@
 package com.stockapp.mainapi.controllers;
-import com.stockapp.mainapi.models.sql.dto.UserRegistrationDTO;
+import com.stockapp.mainapi.models.sql.dto.UserResponseWhenQueriedDTO;
 import com.stockapp.mainapi.models.sql.entitites.UserModel;
 import com.stockapp.mainapi.services.sql.UserService;
 import org.springframework.http.HttpStatus;
@@ -20,14 +20,10 @@ public class UserController {
     @ResponseStatus(HttpStatus.ACCEPTED)
     @PreAuthorize("#id == authentication.principal.getId()")
     public ResponseEntity<Object> getUser(@PathVariable("id") int id) {
-        HashMap<String, String> hm = new HashMap<>();
         try {
             UserModel user = this.userService.findById(id);
-            hm.put("username", user.getUsername());
-            hm.put("message", String.valueOf(user.getId()));
-            return new ResponseEntity<>(hm, HttpStatus.ACCEPTED);
+            return ResponseEntity.ok(new UserResponseWhenQueriedDTO(user.getUsername(), user.getEmail()));
         } catch(Exception e) {
-            hm.put("message", e.getMessage());
             return new ResponseEntity<>(e.getLocalizedMessage(), HttpStatus.BAD_REQUEST);
         }
     }

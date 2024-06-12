@@ -37,6 +37,10 @@ public class SpecieRegistrationDTO implements Serializable {
         return registered;
     }
 
+    public int getRegisteredByInt() {
+        return Integer.parseInt(getRegisteredBy());
+    }
+
     public void setRegistered(String registered) {
         this.registered = registered;
     }
