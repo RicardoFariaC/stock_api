@@ -23,4 +23,12 @@ public class UserService {
             throw new Exception("Ocorreu um erro durante a procura por um usuário... \n" + e.getMessage());
         }
     }
+
+    public UserModel findByUsername(String username) throws Exception {
+        try {
+            return userRepository.findByUsername(username);
+        } catch (Exception e) {
+            throw new Exception("Ocorreu um erro durante a procura por um usuário pelo seu nome... \n" + e.getMessage());
+        }
+    }
 }

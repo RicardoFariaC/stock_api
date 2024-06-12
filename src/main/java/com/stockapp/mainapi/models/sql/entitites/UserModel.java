@@ -107,4 +107,28 @@ public class UserModel implements UserDetails {
     public Set<Roles> getRoles() {
         return this.roles;
     }
+
+    public @NotBlank @NotNull String getEmail() {
+        return email;
+    }
+
+    public void setEmail(@NotBlank @NotNull String email) {
+        this.email = email;
+    }
+
+    public Date getCreatedAt() {
+        return createdAt;
+    }
+
+    public void setCreatedAt(Date createdAt) {
+        this.createdAt = createdAt;
+    }
+
+    public Date getUpdatedAt() {
+        return updatedAt;
+    }
+
+    public void setUpdatedAt(Date updatedAt) {
+        this.updatedAt = updatedAt;
+    }
 }

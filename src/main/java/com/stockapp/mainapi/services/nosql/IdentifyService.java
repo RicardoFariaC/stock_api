@@ -1,13 +1,21 @@
 package com.stockapp.mainapi.services.nosql;
 
 
-import org.springframework.data.mongodb.core.MongoTemplate;
+import com.stockapp.mainapi.models.nosql.entities.IdentifyModel;
+import com.stockapp.mainapi.models.nosql.repositories.IdentifyRepository;
+import org.springframework.stereotype.Service;
 
+@Service
 public class IdentifyService {
     private final String IDENTIFY_COLLECTION = "identify";
-    public MongoTemplate mongoTemplate;
+    private final IdentifyRepository identifyRepository;
 
-    public IdentifyService(MongoTemplate mongoTemplate) {
-        this.mongoTemplate = mongoTemplate;
+    public IdentifyService(IdentifyRepository identifyRepository) {
+        this.identifyRepository = identifyRepository;
     }
+
+    public void register(IdentifyModel identify) {
+        this.identifyRepository.save(identify);
+    }
+
 }

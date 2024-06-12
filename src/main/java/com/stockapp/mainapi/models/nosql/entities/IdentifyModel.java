@@ -3,15 +3,27 @@ package com.stockapp.mainapi.models.nosql.entities;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
-@Document
+@Document(collection = "identify")
 public class IdentifyModel {
     @Id
     private String id;
-
-    private String specieId;
+    private int specieId = 0;
     private String image;
+    private int identifiedBy;
     private String name;
-    private boolean newSpecie;
+
+    public IdentifyModel(String name, String image, int identifiedBy) {
+        this.name = name;
+        this.identifiedBy = identifiedBy;
+        this.image = image;
+    }
+
+    public IdentifyModel(int specieId, String name, String image, int identifiedBy) {
+        this.specieId = specieId;
+        this.image = image;
+        this.identifiedBy = identifiedBy;
+        this.name = name;
+    }
 
     public String getImagePath() {
         if(image == null || id == null) return null;
@@ -26,16 +38,24 @@ public class IdentifyModel {
         this.id = id;
     }
 
-    public String getSpecieId() {
+    public int getSpecieId() {
         return specieId;
     }
 
-    public void setSpecieId(String specieId) {
+    public void setSpecieId(int specieId) {
         this.specieId = specieId;
     }
 
     public String getImage() {
         return image;
+    }
+
+    public int getIdentifiedBy() {
+        return identifiedBy;
+    }
+
+    public void setIdentifiedBy(int identifiedBy) {
+        this.identifiedBy = identifiedBy;
     }
 
     public void setImage(String image) {
@@ -50,11 +70,4 @@ public class IdentifyModel {
         this.name = name;
     }
 
-    public boolean isNewSpecie() {
-        return newSpecie;
-    }
-
-    public void setNewSpecie(boolean newSpecie) {
-        this.newSpecie = newSpecie;
-    }
 }

@@ -30,7 +30,7 @@ public class AuthenticationController {
     }
 
     @PostMapping("/login")
-    public ResponseEntity login(@RequestBody @Valid UserLoginDTO data) {
+    public ResponseEntity<UserResponseDTO> login(@RequestBody @Valid UserLoginDTO data) {
         var authToken = new UsernamePasswordAuthenticationToken(data.username(), data.password());
         var auth = this.authenticationManager.authenticate(authToken);
         var token = tokenService.generateToken((UserModel)auth.getPrincipal());
@@ -40,7 +40,7 @@ public class AuthenticationController {
 
     @PostMapping("/register")
     @ResponseStatus(HttpStatus.CREATED)
-    public ResponseEntity register(@RequestBody UserRegistrationDTO user) {
+    public ResponseEntity<Object> register(@RequestBody UserRegistrationDTO user) {
         if (this.userRepository.findByUsername(user.username()) != null) return ResponseEntity.badRequest().build();
 
         String encryptedPass = new BCryptPasswordEncoder().encode(user.password());

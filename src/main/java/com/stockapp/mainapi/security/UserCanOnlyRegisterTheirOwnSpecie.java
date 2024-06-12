@@ -9,7 +9,5 @@ import java.lang.annotation.Target;
 
 @Target(ElementType.METHOD)
 @Retention(RetentionPolicy.RUNTIME)
-@PreAuthorize("#dto.getRegisteredBy() == String.valueOf(authentication.principal.getId())")
-public @interface UserCanOnlyRegisterTheirOwnSpecie {
-
-}
+@PreAuthorize("#dto.getRegisteredByInt() == authentication.principal.getId()")
+public @interface UserCanOnlyRegisterTheirOwnSpecie {}
